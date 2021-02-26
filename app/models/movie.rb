@@ -1,13 +1,14 @@
 class Movie < ActiveRecord::Base
+
     def self.all_ratings
-        ['G','PG','PG-13','R']
+      return ['G', 'PG', 'PG-13' ,'R']
     end
     
-    def self.with_ratings(filter_list, sort) 
-        if not filter_list.empty?
-            where(:rating => filter_list).order(sort)
-        else 
-            order(sort)
+    def self.with_ratings(ratings)
+        if ratings.nil?
+            Movie.all
+        else
+            Movie.where(rating:ratings)
         end
     end
 end

@@ -13,7 +13,7 @@ class Movie < ActiveRecord::Base
                 return self.where(rating: ratings_list).order(sort_by)
             end
         else
-            #deal with list empty (default options)
+            #deal with list empty (default options is retrieve all)
             if sort_by.empty?
                 return self.all
             else

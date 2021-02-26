@@ -8,7 +8,7 @@ class MoviesController < ApplicationController
 
   def index
     @all_ratings = Movie.all_ratings
-    if !params[:back_to_list]
+    if !params[:back]
       session.clear
     end
     if params[:sort_by]

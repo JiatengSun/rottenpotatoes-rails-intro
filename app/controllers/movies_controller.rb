@@ -8,24 +8,31 @@ class MoviesController < ApplicationController
 
   def index
     @all_ratings = Movie.all_ratings
+    #when clicked back to movie list button the session is cleared
     if !params[:back]
       session.clear
     end
+    #if the page is the same
     if params[:sort_by]
-      @sort_by = params[:sort_by]
+      #set session
       session[:sort_by] = params[:sort_by]
+      @sort_by = params[:sort_by]
     else
+      #if the page is in session when it is on a different page
       if session[:sort_by] && !params[:home]
         @sort_by = session[:sort_by]
       else
         @sort_by = ""
       end
     end
+    #if the page is the same
     if params[:ratings]
+      #set session
+      session[:ratings] = params[:ratings]
       @ratings_to_show_keys = params[:ratings].keys
       @ratings_to_show = params[:ratings]
-      session[:ratings] = params[:ratings]
     else
+      #if the page is in session when it is on a different page
       if session[:ratings] && !params[:home]
         @ratings_to_show_keys = session[:ratings].keys
         @ratings_to_show = session[:ratings]

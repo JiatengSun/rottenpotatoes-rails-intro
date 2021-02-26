@@ -29,16 +29,16 @@ class MoviesController < ApplicationController
     if params[:ratings]
       #set session
       session[:ratings] = params[:ratings]
-      @ratings_to_show_keys = params[:ratings].keys
-      @ratings_to_show = params[:ratings]
+      @rat_key = params[:ratings].keys
+      @rat_show = params[:ratings]
     else
       #if the page is in session when it is on a different page
       if session[:ratings] && !params[:home]
-        @ratings_to_show_keys = session[:ratings].keys
-        @ratings_to_show = session[:ratings]
+        @rat_key = session[:ratings].keys 
+        @rat_show = session[:ratings]
       else
-        @ratings_to_show_keys = []
-        @ratings_to_show = {}
+        @rat_key = []
+        @rat_show = {}
       end
     end
     
@@ -47,7 +47,7 @@ class MoviesController < ApplicationController
       session[:ratings] = {}
     end
 
-    @movies = Movie.with_ratings(@ratings_to_show_keys, @sort_by)
+    @movies = Movie.with_ratings(@rat_key, @sort_by)
   end
 
   def new

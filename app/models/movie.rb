@@ -5,6 +5,7 @@ class Movie < ActiveRecord::Base
     end
     
     def self.with_ratings(ratings_list, sort_by)
+        #list is not empty
         if !ratings_list.empty?
             if sort_by.empty?
                 return self.where(rating: ratings_list)
@@ -12,6 +13,7 @@ class Movie < ActiveRecord::Base
                 return self.where(rating: ratings_list).order(sort_by)
             end
         else
+            #deal with list empty (default options)
             if sort_by.empty?
                 return self.all
             else
